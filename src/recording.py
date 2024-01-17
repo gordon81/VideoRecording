@@ -22,6 +22,7 @@ picam2a = Picamera2(0)
 picam2a.post_callback = post_callbackA
 picam2a.configure(picam2a.create_video_configuration(main={"size": (1920, 1080)},lores={"size": (1280,720)}))
 picam2a.set_controls({"AfMode": 2 ,"AfTrigger": 0})
+
 filenameB = f"Videos/right{int(time.time())}.mp4"
 picam2b = Picamera2(1)
 picam2b.post_callback = post_callbackB
