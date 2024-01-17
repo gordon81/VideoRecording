@@ -29,11 +29,11 @@ def post_callback(request):
     layout_info.addWidget(label)
 
 camara_list = Picamera2.global_camera_info()
-for i in range(len(camara_list)):
-    picam2_list.append(Picamera2(i))
-    config_list.append(picam2_list[i].still_configuration())
 
-    picam2_list[i].post_callback = post_callback
+for i in range(0,len(camara_list)):
+    picam2_list.append(Picamera2(i))
+#   config_list.append(picam2_list[i].still_configuration())
+#    picam2_list[i].post_callback = post_callback
     picam2_list[i].configure(picam2_list[i].create_video_configuration(main={"size": (1920, 1080)},lores={"size": (1280,720)}))
     picam2_list[i].set_controls({"AfMode": 2 ,"AfTrigger": 0})
     layout_preview.addWidget( QGlPicamera2(picam2_list[i], width=800, height=480, keep_ar=False), 50)
@@ -57,19 +57,19 @@ def on_button_clicked():
         button.setText("Start recording")
         recording = False
 
+button = QPushButton("Start recording")
+button.clicked.connect(on_button_clicked)
+
+layout_base = QVBoxLayout()
+layout_base.addWidget(button)
+layout_base.addLayout(layout_preview, 100)
+layout_base.addLayout(layout_info, 50)
+
 
 window = QWidget()
 window.setWindowTitle("Video Recording App")
-
-layout_v = QVBoxLayout()
-button = QPushButton("Start recording")
-button.clicked.connect(on_button_clicked)
-layout_v.addWidget(button)
-layout_v.addLayout(layout_preview, 100)
-
-layout_v.addLayout(layout_info, 50)
 window.resize(1200, 720)
-window.setLayout(layout_v)
+window.setLayout(layout_base)
 
 for picam2 in picam2_list:
     picam2.start()
