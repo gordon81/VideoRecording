@@ -42,7 +42,7 @@ def on_button_clicked():
         for picam2 in picam2_list:
             filename = f"Videos/{filenames[i]}{int(time.time())}.mp4"
             encoder = H264Encoder(10000000)
-            output = FfmpegOutput(filename, audio=True)    
+            output = FfmpegOutput(filename, audio=True)
             picam2.start_encoder(encoder, output, quality=Quality.HIGH)
             i=i+1
 
@@ -61,7 +61,7 @@ button.clicked.connect(on_button_clicked)
 pan_zoom_list = []
 for picam2 in picam2_list:
     pan_zoom_list.append( panTab(picam2))
-    
+
 layout_zoom = QHBoxLayout()
 for pan_tab in pan_zoom_list:
     layout_zoom.addWidget(pan_tab,25)

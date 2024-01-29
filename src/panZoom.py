@@ -8,7 +8,7 @@ import numpy as np
 
 class panZoomDisplay(QWidget):
     updated = pyqtSignal()
-        
+
     def __init__(self,picam2):
         super().__init__()
         self.picam2 = picam2
@@ -52,7 +52,6 @@ class panZoomDisplay(QWidget):
         self.updated.emit()
 
     def draw_centered(self, pos):
-        #global scaler_crop
         center = [int(i / self.scale) for i in pos]
         full_img = self.picam2.camera_properties["ScalerCropMaximum"]
         w = self.scaler_crop[2]
@@ -76,7 +75,6 @@ class panZoomDisplay(QWidget):
         self.draw_centered(pos)
 
     def setZoom(self):
-        #global scaler_crop
         if self.zoom_level < 1:
             self.zoom_level = 1.0
         if self.zoom_level > self.max_zoom:
@@ -114,7 +112,7 @@ class panTab(QWidget):
         self.layout = QFormLayout()
         self.setLayout(self.layout)
         self.picam2 = picam2
-                
+
         self.label = QLabel((
             "Pan and Zoom Controls\n"
             "To zoom in/out, scroll up/down in the display below\n"
@@ -129,5 +127,4 @@ class panTab(QWidget):
         self.layout.addRow(self.zoom_text)
         self.layout.addRow(self.pan_display)
         self.layout.setAlignment(self.pan_display, Qt.AlignCenter)
-
 
