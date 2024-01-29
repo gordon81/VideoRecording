@@ -19,12 +19,13 @@ filenames = [
     'left',
     'right'
 ]
-
+cam = 1
 recording = False
 
 camara_list = Picamera2.global_camera_info()
 for i in range(len(camara_list)):
     picam2_list.append(Picamera2(i))
+    cam = cam + 1
 
 app = QApplication([])
 layout_preview = QHBoxLayout()
@@ -33,7 +34,7 @@ layout_info = QHBoxLayout()
 for picam2 in picam2_list:
     picam2.configure(picam2.create_video_configuration(main={"size": (1920, 1080)}, lores={"size": (1280, 720)}))
     picam2.set_controls({"AfMode": 2, "AfTrigger": 0})
-    layout_preview.addWidget(QGlPicamera2(picam2, width=800, height=480, keep_ar=False), 50)
+    layout_preview.addWidget(QGlPicamera2(picam2, width=800, height=480, keep_ar=False), 100/cam )
 
 def on_button_clicked():
     global recording
