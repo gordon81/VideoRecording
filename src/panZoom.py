@@ -101,7 +101,7 @@ class panZoomDisplay(QWidget):
         self.zoom_level += zoom_dir * self.zoom_step
         self.setZoom()
         # If desired then also center the zoom on the pointer
-        # self.draw_centered((event.position().x(), event.position().y()))
+        self.draw_centered((event.position().x(), event.position().y()))
 
 
 
