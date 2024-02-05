@@ -35,7 +35,8 @@ layout_preview = QHBoxLayout()
 layout_info = QHBoxLayout()
 
 for picam2 in picam2_list:
-    picam2.configure(picam2.create_video_configuration(main={"size": (1920, 1080)}, lores={"size": (1920, 1080)}))
+    full_res=picam2.sensor_resolution
+    picam2.configure(picam2.create_video_configuration(main={"size": (2312,1736),"format": "RGB888"}, lores={"size": (1920, 1080)}, raw={"size":full_res}))
     picam2.set_controls({"AfMode": 2, "AfTrigger": 0})
     layout_width = 100 // cam
     layout_preview.addWidget(QGlPicamera2(picam2, width=800, height=480, keep_ar=False),layout_width )
