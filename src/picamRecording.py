@@ -1,5 +1,7 @@
 #!/usr/bin/python3
 import time
+import os
+
 
 from PyQt5 import QtCore
 from PyQt5.QtWidgets import (QApplication, QHBoxLayout, QLabel, QPushButton,
@@ -21,6 +23,7 @@ filenames = [
 ]
 cam = 1
 recording = False
+home = os.path.expanduser('~')
 
 camara_list = Picamera2.global_camera_info()
 for i in range(len(camara_list)):
@@ -42,7 +45,7 @@ def on_button_clicked():
     if not recording:
         i = 0
         for picam2 in picam2_list:
-            filename = f"Videos/{filenames[i]}{int(time.time())}.mp4"
+            filename = f"{home}/Videos/{filenames[i]}{int(time.time())}.mp4"
             encoder = H264Encoder(10000000)
             output = FfmpegOutput(filename, audio=True)
             picam2.start_encoder(encoder, output, quality=Quality.VERY_HIGH)
