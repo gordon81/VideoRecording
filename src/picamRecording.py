@@ -14,7 +14,7 @@ from picamera2.previews.qt import QGlPicamera2
 
 from panZoom import panTab
 
-frame_rate = 60
+frame_rate = 30
 picam2_list = []
 config_list = []
 filenames = [
@@ -35,9 +35,7 @@ layout_preview = QHBoxLayout()
 layout_info = QHBoxLayout()
 
 for picam2 in picam2_list:
-    full_res=picam2.sensor_resolution
-    print(full_res)
-    picam2.configure(picam2.create_video_configuration(main={"size": (2312, 1736), "format": "RGB888"}, lores={"size": (1920, 1080)}, raw={"size": full_res}))
+    picam2.configure(picam2.create_video_configuration(main={"size": (2312, 1736)}, lores={"size": (1920, 1080)}))
     picam2.set_controls({"AfMode": 2, "AfTrigger": 0})
     layout_width = 100 // cam
     layout_preview.addWidget(QGlPicamera2(picam2, width=800, height=480, keep_ar=False),layout_width )

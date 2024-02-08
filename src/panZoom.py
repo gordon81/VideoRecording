@@ -43,7 +43,7 @@ class panZoomDisplay(QWidget):
         scaled_full_img[:2] = [0, 0]
         painter.drawRect(*scaled_full_img)
         # Cropped section
-        print(self.scaler_crop)
+        #print(self.scaler_crop)
         scaled_scaler_crop = [int(i * self.scale) for i in self.scaler_crop]
         scaled_scaler_crop[0] -= origin[0]
         scaled_scaler_crop[1] -= origin[1]
